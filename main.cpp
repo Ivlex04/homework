@@ -13,6 +13,15 @@
 #include <iostream>
 #include <ctime>
 
+void print_array(int a[], int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        std::cout << a[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 void arithmetic_fill(int mas[], int n, int a1, int d)
 {
     for(int i=0; i<n;i++)
@@ -30,16 +39,26 @@ void random_fill(int a[], int n)
     }
 }
 
-void print_array(int a[], int n)
+void swap(int &a, int &b)
 {
-    for(int i=0; i<n; i++)
-    {
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
+    int t = a;
+    a = b;
+    b = t;
 }
 
-
+void prestan_fill(int a[], int n)
+{
+    srand(time(0));
+    for (int  i = 0; i<n ; i++)
+    {
+        a[i]= i+1;
+    }
+    print_array(a,n);
+    for (int i = 0; i < n; i++)
+    {
+        swap(a[i], a[rand()%(n-i)+1]);
+    }
+}
 
 int main() {
     int n, a1, d;
@@ -51,6 +70,7 @@ int main() {
 
     int* a = new int[n];
     int* b = new int[n];
+    int* c = new int[n];
 
     arithmetic_fill(a, n, a1, d);
     print_array(a,n);
@@ -68,7 +88,11 @@ int main() {
     }
     std::cout << count << std::endl;
 
+    prestan_fill(c,n);
+    print_array(c,n);
+
     delete a;
     delete b;
+    delete c;
     return 0;
 }
